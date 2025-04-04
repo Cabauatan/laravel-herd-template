@@ -2,6 +2,10 @@
 import { useLayout } from "@/layout/composables/layout";
 
 const { toggleMenu, toggleDarkMode, isDarkTheme } = useLayout();
+
+Echo.channel("chat").listen("SampleReverbEvent", (event) => {
+    console.log("websocket-connected");
+});
 </script>
 
 <template>

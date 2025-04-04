@@ -3,7 +3,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite --host"
     },
     "devDependencies": {
         "@primevue/auto-import-resolver": "^4.3.3",

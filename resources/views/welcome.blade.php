@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="icon" href="/images.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title class="text-red-900">Star | Dashboard</title>
+    <title class="text-red-900">Template | Dashboard</title>
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite(['resources/js/app.js'])
