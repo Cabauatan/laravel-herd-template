@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class LoginRepository extends Controller
+class LoginRepository
 {
     public function login($data)
     {
@@ -20,6 +19,7 @@ class LoginRepository extends Controller
                         'name' => $user->name,
                     ],
                     'token' => $user->createToken('ApiToken')->plainTextToken,
+                    
                 ];
                 $res['code'] = 200;
                 $res['status'] = true;
