@@ -10,7 +10,10 @@ class LoginRepository
     public function login($data)
     {
         try {
-            if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+            if(Auth::attempt(['email' => $data['email'],'password' => $data['password']]) || 
+            Auth::attempt(['account_number' => $data['email'],'password' => $data['password']]))
+            {
+                Auth::logoutOtherDevices($data['password']);
                 Cache::flush();
                 Auth::user()->tokens()->delete();
                 $user = Auth::user();
@@ -18,13 +21,14 @@ class LoginRepository
                     'user' => [
                         'name' => $user->name,
                     ],
-                    'token' => $user->createToken('ApiToken')->plainTextToken,
+                    'token' => $user->createToken('ApiToken for'.$user->name,['*'],now()->addMinutes(5))->plainTextToken,
                     
                 ];
                 $res['code'] = 200;
                 $res['status'] = true;
                 return $res;
-            } else {
+            }
+            else {
                 $res['title'] = 'Login Failed';
                 $res['message'] = 'Login Failed please check your email and password.';
                 $res['code'] = 401;
@@ -38,9 +42,10 @@ class LoginRepository
             return $res;
         }
     }
-    public function logout()
+    public function logout($request)
     {
         Cache::flush();
         Auth::user()->tokens()->delete();
+        $request->session()->invalidate();
     }
 }

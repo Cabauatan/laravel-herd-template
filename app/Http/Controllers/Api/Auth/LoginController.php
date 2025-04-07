@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Api\Auth\LoginRepository;
 
 class LoginController extends BaseController
@@ -17,17 +19,20 @@ class LoginController extends BaseController
     }
     public function login(Request $request)
     {
-        // $res = $this->repo->login($request->validated());
-        $res = $this->repo->login($request);
-
-        $res['token1'] =  $request->ips();
-
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors(), 442);
+        }
+        $res = $this->repo->login($request->all());
 
         if ($res['status']) return $this->sendResponse($res, 'login successfully.'); 
         return $this->sendError($res, 'Login Failed please check your email and password.', $res['code']);
     }
-    public function logout()
+    public function logout(Request $request)
     {
-        $this->repo->logout();
+        $this->repo->logout($request);
     }
 }
