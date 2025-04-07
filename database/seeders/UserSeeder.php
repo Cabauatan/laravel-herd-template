@@ -22,5 +22,14 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             
         ]);
+
+        User::create([
+            'name' => 'Laurence Radasa',
+            'account_number' => 'C-676',
+            'account_created' => Carbon::now()->timezone('Asia/Manila'),
+            'email' => 'laurence@afab.gov.ph',
+            'password' => Hash::make('password'),
+            
+        ]);
     }
 }

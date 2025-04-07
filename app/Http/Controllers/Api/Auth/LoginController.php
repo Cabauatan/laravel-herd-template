@@ -26,7 +26,7 @@ class LoginController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 442);
         }
-        $res = $this->repo->login($request->all());
+        $res = $this->repo->login($request);
 
         if ($res['status']) return $this->sendResponse($res, 'login successfully.'); 
         return $this->sendError($res, 'Login Failed please check your email and password.', $res['code']);

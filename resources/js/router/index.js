@@ -13,7 +13,23 @@ const router = createRouter({
                     name: "dashboard",
                     component: () => import("@/views/Dashboard.vue"),
                 },
+                {
+                    path: "/settings",
+                    children: [
+                        {
+                            path: "account",
+                            name: "account",
+                            component: () =>
+                                import("@/views/settings/Account.vue"),
+                        },
+                    ],
+                },
             ],
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: () => import("@/views/auth/Login.vue"),
         },
     ],
 });

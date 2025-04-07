@@ -207,13 +207,13 @@ const model = ref([
     },
 
     {
-        label: "Accounts",
+        label: "Settings",
         role: ["Admin", "Superadmin"],
         items: [
             {
-                label: "Admin",
+                label: "User List",
                 icon: "fa-solid fa-users",
-                to: "/accounts/admin",
+                to: "/settings/account",
                 role: ["Admin", "Superadmin"],
             },
             {

@@ -10,8 +10,8 @@ class LoginRepository
     public function login($data)
     {
         try {
-            if(Auth::attempt(['email' => $data['email'],'password' => $data['password']]) || 
-            Auth::attempt(['account_number' => $data['email'],'password' => $data['password']]))
+            if(Auth::attempt(['email' => $data['email'],'password' => $data['password']],$data['remember']) || 
+            Auth::attempt(['account_number' => $data['email'],'password' => $data['password']],$data['remember']))
             {
                 Auth::logoutOtherDevices($data['password']);
                 Cache::flush();
@@ -21,11 +21,11 @@ class LoginRepository
                     'user' => [
                         'name' => $user->name,
                     ],
-                    'token' => $user->createToken('ApiToken for'.$user->name,['*'],now()->addMinutes(5))->plainTextToken,
-                    
                 ];
+                $res['token'] = $user->createToken('ApiToken for '.$user->name,['*'],now()->addMinute())->plainTextToken;
                 $res['code'] = 200;
                 $res['status'] = true;
+                $res['ip'] = $data->ip();
                 return $res;
             }
             else {

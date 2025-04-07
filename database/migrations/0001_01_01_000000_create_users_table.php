@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('account_number');
+            $table->string('account_number')->unique();
             $table->string('customer_contact')->nullable();
             $table->string('customer_address')->nullable();
             $table->string('company_name')->default('AUTHORITY OF THE FREEPORT AREA OF BATAAN');
