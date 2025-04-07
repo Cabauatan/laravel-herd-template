@@ -7,9 +7,9 @@ class BaseController extends Controller
     public function sendResponse($result, $message)
     {
         $response = [
-            'gatewayApi' => 'Ticketing',
-            'author' => 'This api command coded by CO-MIS',
-            'version' => 'v2.0',
+            // 'gatewayApi' => 'Ticketing',
+            'author' => 'MIS PROGRAMMER',
+            'version' => 'v1.0',
             'response' => true,
             'data' => $result,
             'message' => $message

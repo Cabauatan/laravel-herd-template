@@ -17,9 +17,9 @@ class LoginRepository extends Controller
                 $user = Auth::user();
                 $res['list'] = [
                     'user' => [
-                        'id' => $user->id,
                         'name' => $user->name,
                     ],
+                    'token' => $user->createToken('ApiToken')->plainTextToken,
                 ];
                 $res['code'] = 200;
                 $res['status'] = true;

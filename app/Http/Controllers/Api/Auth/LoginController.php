@@ -18,7 +18,7 @@ class LoginController extends BaseController
     {
         $res = $this->repo->login($request->validated());
         if ($res['status']) return $this->sendResponse($res, 'login successfully.'); 
-        return $this->sendResponse($res, 'Login Failed please check your email and password.', $res['code']);
+        return $this->sendError($res, 'Login Failed please check your email and password.', $res['code']);
     }
     public function logout()
     {
